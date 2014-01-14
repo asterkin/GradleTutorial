@@ -1,0 +1,29 @@
+classesDir = new File('build/classes')
+task resources << {
+  classesDir.mkdirs()
+}
+task compile(dependsOn: 'resources') << {
+  if(classesDir.isDirectory()) {
+    println 'The class directory exists. I can operate'
+  }
+}
+
+task printProps << {
+  println commandLineProjectProp
+  println gradlePropertiesProp
+  println systemProjectProp
+  println envProjectProp
+  println System.properties['system']
+}
+
+apply from: 'other.gradle'
+
+task configure << {
+  pos = configure(new java.text.FieldPosition(10)) {
+    beginIndex = 1
+    endIndex   = 5
+  }
+  println pos.beginIndex
+  println pos.endIndex
+}
+
